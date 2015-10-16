@@ -159,5 +159,6 @@ for_window [title=" - Google Chrome$"] border none
 
 bindsym $mod+z exec i3lock -c 000000
 
-exec konsole
-exec google-chrome
+bindsym $mod+t exec konsole
+bindsym $mod+b exec google-chrome
+
