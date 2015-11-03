@@ -5,3 +5,9 @@ bindkey -M vicmd '?' history-incremental-search-backward
 bindkey '^R' history-incremental-search-backward
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
+
+export VAGRANT_DEFAULT_PROVIDER=libvirt
+export EDITOR=vim
+export GOPATH=$HOME/go
+export GOROOT=/usr/lib/golang
+export PATH=$GOPATH/bin:$PATH
