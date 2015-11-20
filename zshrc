@@ -11,3 +11,7 @@ export EDITOR=vim
 export GOPATH=$HOME/go
 export GOROOT=/usr/lib/golang
 export PATH=$GOPATH/bin:$PATH
+
+if [ -f $HOME/.aliases ]; then
+	source $HOME/.aliases
+fi
