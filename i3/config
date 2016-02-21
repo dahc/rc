@@ -156,9 +156,15 @@ bindsym $mod+r mode "resize"
 #}
 
 for_window [title=" - Google Chrome$"] border none
+for_window [title="Konsole"] border none
 
 bindsym $mod+z exec i3lock -c 000000
 
 bindsym $mod+t exec konsole
 bindsym $mod+b exec google-chrome
+bindsym $mod+Shift+v exec vlc
+bindsym $mod+Shift+b exec dolphin
+
+exec --no-startup-id bash /home/chad/.xinitrc
+exec --no-startup-id xsetroot -solid "#000000"
 

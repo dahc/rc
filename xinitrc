@@ -1,2 +1,2 @@
 xmodmap ~/.xmodmap
-xrandr --output DVI1 --rotate left --pos -1080x-450
+xrandr --output DP1 --rotate left --pos 1920x-250 --output DP2 --pos 3000x0
