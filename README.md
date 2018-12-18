@@ -1,2 +1,2 @@
 # rc
-My personal preferences for zshrc, tmux.conf, vimrc, i3/config, etc.
+My personal preferences for various rc and similar config files.
