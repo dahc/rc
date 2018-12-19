@@ -1,20 +1,29 @@
-" Plugins setup via Pathogen:
-"   Functional stuff:
-"     vim-fugitive (nice git integration, also used by airline for status)
-"     nerdtree (a rather conventional looking sidebar filesystem explorer)
-"     nerdtree-git-plugin (adds git status flags to nerdtree)
-"     julia-vim (language-specific improvements for Julia)
-"     vim-go (language-specific improvements for Go)
-"   Pretty stuff:
-"     awesome-vim-colorschemes (just for PaperColor lately)
-"     vim-airline (lovely statusline and tabline, requires powerline fonts)
-"     vim-airline-themes (usually 'papercolor' or 'angr')
-"     tmuxline (theme-aware statusline config generator for tmux)
-execute pathogen#infect()
+" Vundle plugin setup
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" General-purpose functional plugins
+Plugin 'tpope/vim-fugitive'             " git integration
+Plugin 'scrooloose/nerdtree'            " nice file browser
+Plugin 'Xuyuanp/nerdtree-git-plugin'    " git flags in file browser
+
+" Language-specific stuff (syntax, linting, etc.)
+Plugin 'JuliaEditorSupport/julia-vim'
+Plugin 'fatih/vim-go'
+
+" Pretty stuff
+Plugin 'NLKNguyen/papercolor-theme'     " eye-pleasing colors
+Plugin 'vim-airline/vim-airline'        " fancy statusline & tabline
+Plugin 'vim-airline/vim-airline-themes' " themes for the above
+Plugin 'edkolev/tmuxline.vim'           " fancy statusline for tmux
+
+call vundle#end()
 
 " common editing defaults
 filetype plugin indent on
-set nocompatible hidden expandtab tabstop=4 shiftwidth=4
+set hidden expandtab tabstop=4 shiftwidth=4
 
 " filetype-specific overrides
 augroup filetypes
@@ -44,13 +53,16 @@ set t_Co=256 background=dark
 colorscheme PaperColor
 
 " fancy statusline and tabline
-let g:airline_powerline_fonts = 1
 let g:airline_theme = 'angr'
 let g:airline_section_z = '%l/%L:%v [%P]'
 let g:airline#extensions#tabline#enabled = 1
-" A note about tmuxline:
-"     I find tmuxline's autoconfiguration a bit overzealous, so I just use
-" it to generate a tmux config (via :TmuxlineSnapshot) and then uninstall
-" tmuxline. That way I can tweak the resulting tmux config without having
-" tmuxline stomp all over any changes. There's probably a better way, but
-" I don't change themes very often, so it hasn't been an issue for me.
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'b'    : '#W',
+      \'c'    : '#H',
+      \'win'  : '#I #W',
+      \'cwin' : '#I #W',
+      \'x'    : '%A',
+      \'y'    : "%Y-%m-%d %H:%M %Z (#(date -u +'%%H:%%M %%Z'))",
+      \'z'    : '#H'}
