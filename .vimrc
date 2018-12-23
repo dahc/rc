@@ -8,6 +8,7 @@ call vundle#begin()
 Plugin 'tpope/vim-fugitive'             " git integration
 Plugin 'scrooloose/nerdtree'            " nice file browser
 Plugin 'Xuyuanp/nerdtree-git-plugin'    " git flags in file browser
+Plugin 'majutsushi/tagbar'              " ctags exploration?
 
 " Language-specific stuff (syntax, linting, etc.)
 Plugin 'JuliaEditorSupport/julia-vim'
@@ -43,19 +44,22 @@ set path+=** wildmenu
 let mapleader = ';'
 nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>w <C-w>
-nnoremap <Leader>% :vsplit<CR>
-nnoremap <Leader>" :split<CR>
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>s :split<CR>
 nnoremap <Leader>n :NERDTreeFocus<CR>
+nnoremap <Leader>N :NERDTreeFind<CR>zz
+nnoremap <Leader>t :TagbarOpen fj<CR>
 
 " pretty colors
 syntax on
 set t_Co=256 background=dark
 colorscheme PaperColor
 
-" fancy statusline and tabline
+" fancy statusline
 let g:airline_theme = 'angr'
+let g:airline_section_b = '%{FugitiveStatusline()}'
 let g:airline_section_z = '%l/%L:%v [%P]'
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 let g:tmuxline_powerline_separators = 0
 let g:tmuxline_preset = {
       \'a'    : '#S',
@@ -66,3 +70,36 @@ let g:tmuxline_preset = {
       \'x'    : '%A',
       \'y'    : "%Y-%m-%d %H:%M %Z (#(date -u +'%%H:%%M %%Z'))",
       \'z'    : '#H'}
+
+" tagbar tag explorer settings, note gotags dependency
+let g:tagbar_width = 70
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
+
+" nerdtree settings
+let g:NERDTreeWinSize = 40
