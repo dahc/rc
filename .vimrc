@@ -26,11 +26,14 @@ call vundle#end()
 filetype plugin indent on
 set hidden expandtab tabstop=4 shiftwidth=4
 
-" filetype-specific overrides
+" filetype-specific stuff
 augroup filetypes
     autocmd!
+    autocmd BufNewFile,BufRead Jenkinsfile set filetype=groovy
+    autocmd BufNewFile,BufRead *.eyaml set filetype=yaml
+    autocmd BufNewFile,BufRead *.pp set filetype=ruby
     autocmd FileType c,go setlocal noexpandtab shiftwidth=8 tabstop=8
-    autocmd FileType css,html,tex,yaml setlocal shiftwidth=2 tabstop=2
+    autocmd FileType css,html,tex,yaml,ruby setlocal shiftwidth=2 tabstop=2
 augroup END
 
 " enable nice recursive searches and enhanced tab completion
@@ -56,7 +59,7 @@ set t_Co=256 background=dark
 colorscheme PaperColor
 
 " fancy statusline
-let g:airline_theme = 'angr'
+let g:airline_theme = 'papercolor'
 let g:airline_section_b = '%{FugitiveStatusline()}'
 let g:airline_section_z = '%l/%L:%v [%P]'
 "let g:airline#extensions#tabline#enabled = 1
@@ -68,8 +71,8 @@ let g:tmuxline_preset = {
       \'win'  : '#I #W',
       \'cwin' : '#I #W',
       \'x'    : '%A',
-      \'y'    : "%Y-%m-%d %H:%M %Z (#(date -u +'%%H:%%M %%Z'))",
-      \'z'    : '#H'}
+      \'y'    : "%Y-%m-%d %H:%M %Z (UTC#(date +'%%z'))",
+      \'z'    : "#(date -u +'%%Y-%%m-%%d %%H:%%M %%Z')"}
 
 " tagbar tag explorer settings, note gotags dependency
 let g:tagbar_width = 70
